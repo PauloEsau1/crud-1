@@ -15,7 +15,16 @@ const controller = {
 
 	// Detail - Detail from one product
 	detail: (req, res) => {
-		// Do the magic
+		let productId = req.params.id;
+		console.log(productId);
+		const product = products.find((producto)=>{
+			return producto.id === parseInt(productId);
+		});
+		if(product){
+			res.render('detail',{product});
+		}else{
+			res.render('error');
+		}
 	},
 
 	// Create - Form to create
