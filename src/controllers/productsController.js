@@ -47,11 +47,14 @@ const controller = {
 
   // Update - Form to edit
   edit: (req, res) => {
-    // Do the magic
+    const productToEdit = products.find((product) => {
+      return product.id == req.params.id;      
+    });
+    res.render('product-edit-form', { productToEdit });
   },
   // Update - Method to update
   update: (req, res) => {
-    // Do the magic
+    res.redirect("/");
   },
 
   // Delete - Delete one product from DB
