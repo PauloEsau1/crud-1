@@ -160,14 +160,5 @@
     "description": "dfdfadf",
     "id": 18,
     "image": "img-cafetera-moulinex.jpg"
-  },
-  {
-    "name": "Producto editado",
-    "price": "212",
-    "discount": "11",
-    "category": "visited",
-    "description": "adfadf",
-    "id": 19,
-    "image": "img-cafetera-moulinex.jpg"
   }
 ]
