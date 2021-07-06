@@ -17,13 +17,16 @@ const controller = {
     let productId = req.params.id;
     console.log(productId);
     const product = products.find((producto) => {
-      return producto.id === parseInt(productId);
+      return producto.id == productId;
     });
+    console.log(product);
     if (product) {
       res.render("detail", { product });
     } else {
       res.render("error");
     }
+    
+  
   },
 
   // Create - Form to create
@@ -50,10 +53,23 @@ const controller = {
     const productToEdit = products.find((product) => {
       return product.id == req.params.id;      
     });
-    res.render('product-edit-form', { productToEdit });
+    
+    if (productToEdit) {
+      res.render("product-edit-form", { productToEdit });
+    } else {
+      res.render("error");
+    }
   },
   // Update - Method to update
   update: (req, res) => {
+    const productInfo = req.body;
+    const productIdex = products.findIndex(producto =>{
+      return producto.id == req.params.id;
+    });
+
+    products[productIdex]={...products[productIdex], ...productInfo};
+
+    fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
     res.redirect("/");
   },
 
