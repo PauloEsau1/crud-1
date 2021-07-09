@@ -7,7 +7,7 @@ const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const controller = {
-	index: (req, res) => {
+	index: (_, res) => {
 		const visitados = products.filter((product)=>{
 			return product.category === 'visited';
 		});
@@ -17,7 +17,11 @@ const controller = {
 		res.render('index', {visitados, promociones});
 	},
 	search: (req, res) => {
-		// Do the magic
+		const {keywords} = req.query;
+		const resultados = products.filter(({description, name})=>{
+			return description.includes(keywords) || name.includes(keywords);
+		  });
+		res.render('results', {resultados, keywords});
 	},
 };
 
